@@ -23,11 +23,14 @@ module Authkeeper
     register('api.gitlab.client') { Authkeeper::GitlabApi::Client.new }
     register('api.google.auth_client') { Authkeeper::GoogleAuthApi::Client.new }
     register('api.google.client') { Authkeeper::GoogleApi::Client.new }
+    register('api.yandex.auth_client') { Authkeeper::YandexAuthApi::Client.new }
+    register('api.yandex.client') { Authkeeper::YandexApi::Client.new }
 
     register('services.providers.github') { Authkeeper::Providers::Github.new }
     register('services.providers.gitlab') { Authkeeper::Providers::Gitlab.new }
     register('services.providers.telegram') { Authkeeper::Providers::Telegram.new }
     register('services.providers.google') { Authkeeper::Providers::Google.new }
+    register('services.providers.yandex') { Authkeeper::Providers::Yandex.new }
 
     register('services.fetch_session') { Authkeeper::FetchSessionService.new }
     register('services.generate_token') { Authkeeper::GenerateTokenService.new }

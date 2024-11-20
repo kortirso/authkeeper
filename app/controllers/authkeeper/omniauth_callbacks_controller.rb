@@ -8,13 +8,15 @@ module Authkeeper
       github_provider: 'services.providers.github',
       gitlab_provider: 'services.providers.gitlab',
       telegram_provider: 'services.providers.telegram',
-      google_provider: 'services.providers.google'
+      google_provider: 'services.providers.google',
+      yandex_provider: 'services.providers.yandex'
     ]
 
     GITHUB = 'github'
     GITLAB = 'gitlab'
     TELEGRAM = 'telegram'
     GOOGLE = 'google'
+    YANDEX = 'yandex'
 
     skip_before_action :verify_authenticity_token
     skip_before_action :authenticate, only: %i[create]
@@ -62,6 +64,7 @@ module Authkeeper
       when GITLAB then gitlab_provider
       when TELEGRAM then telegram_provider
       when GOOGLE then google_provider
+      when YANDEX then yandex_provider
       end
     end
 
@@ -69,8 +72,9 @@ module Authkeeper
       user_session = Authkeeper.configuration.user_session_model.constantize.create!(user: user)
       cookies[Authkeeper.configuration.access_token_name] = {
         value: generate_token.call(user_session: user_session)[:result],
+        domain: Authkeeper.configuration.domain,
         expires: 1.week.from_now
-      }
+      }.compact
     end
   end
 end

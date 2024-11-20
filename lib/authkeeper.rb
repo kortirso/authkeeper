@@ -18,6 +18,7 @@ module Authkeeper
   #     config.omniauth :gitlab, client_id: 'id', client_secret: 'secret', redirect_url: 'redirect_url'
   #     config.omniauth :google, client_id: 'id', client_secret: 'secret', redirect_uri: 'redirect_uri'
   #     config.omniauth :telegram, client_id: 'id', client_secret: 'secret', bot_secret: 'bot_secret'
+  #     config.omniauth :yandex, client_id: 'id', client_secret: 'secret', redirect_uri: 'redirect_uri'
   #   end
   #
   def configure

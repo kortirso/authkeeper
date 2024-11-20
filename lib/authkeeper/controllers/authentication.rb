@@ -28,7 +28,10 @@ module Authkeeper
       def authenticate
         return if current_user
 
-        session[:pullkeeper_fall_back_url] = request.fullpath
+        if Authkeeper.configuration.fallback_url_session_name
+          session[Authkeeper.configuration.fallback_url_session_name] = request.fullpath
+        end
+
         authentication_error
       end
 

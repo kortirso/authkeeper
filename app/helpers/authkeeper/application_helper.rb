@@ -7,6 +7,7 @@ module Authkeeper
       when :github then github_oauth_link
       when :gitlab then gitlab_oauth_link
       when :google then google_oauth_link
+      when :yandex then yandex_oauth_link
       end
     end
 
@@ -23,6 +24,10 @@ module Authkeeper
 
     def google_oauth_link
       "https://accounts.google.com/o/oauth2/auth?scope=https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email&response_type=code&client_id=#{value(:google, :client_id)}&redirect_uri=#{value(:google, :redirect_url)}"
+    end
+
+    def yandex_oauth_link
+      "https://oauth.yandex.ru/authorize?response_type=code&client_id=#{value(:yandex, :client_id)}"
     end
     # rubocop: enable Layout/LineLength
 
