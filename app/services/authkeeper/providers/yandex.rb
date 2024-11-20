@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module AuthContext
+module Authkeeper
   module Providers
     class Yandex
       include Deps[

@@ -1,11 +1,13 @@
 # frozen_string_literal: true
 
-module YandexAuthApi
-  class Client < HttpService::Client
-    include Requests::FetchAccessToken
+module Authkeeper
+  module YandexAuthApi
+    class Client < HttpService::Client
+      include Requests::FetchAccessToken
 
-    BASE_URL = 'https://oauth.yandex.ru/'
+      BASE_URL = 'https://oauth.yandex.ru/'
 
-    option :url, default: proc { BASE_URL }
+      option :url, default: proc { BASE_URL }
+    end
   end
 end

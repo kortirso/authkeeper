@@ -4,12 +4,7 @@ module Authkeeper
   class OmniauthCallbacksController < ::ApplicationController
     include AuthkeeperDeps[
       fetch_session: 'services.fetch_session',
-      generate_token: 'services.generate_token',
-      github_provider: 'services.providers.github',
-      gitlab_provider: 'services.providers.gitlab',
-      telegram_provider: 'services.providers.telegram',
-      google_provider: 'services.providers.google',
-      yandex_provider: 'services.providers.yandex'
+      generate_token: 'services.generate_token'
     ]
 
     GITHUB = 'github'
@@ -40,10 +35,9 @@ module Authkeeper
     end
 
     def validate_auth
-      case params[:provider]
-      when TELEGRAM then validate_telegram_auth
-      else validate_general_auth
-      end
+      return validate_telegram_auth if params[:provider] == TELEGRAM
+
+      validate_general_auth
     end
 
     def validate_general_auth
@@ -59,13 +53,7 @@ module Authkeeper
     end
 
     def provider_service(provider)
-      case provider
-      when GITHUB then github_provider
-      when GITLAB then gitlab_provider
-      when TELEGRAM then telegram_provider
-      when GOOGLE then google_provider
-      when YANDEX then yandex_provider
-      end
+      Authkeeper::Container.resolve("services.providers.#{provider}")
     end
 
     def sign_in(user)

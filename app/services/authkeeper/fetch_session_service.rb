@@ -23,7 +23,7 @@ module Authkeeper
     def find_session(payload)
       Authkeeper
         .configuration.user_session_model.constantize
-        .where(uuid: payload.fetch('uuid', '')).first
+        .find_by(id: payload.fetch('uuid', ''))
     end
   end
 end

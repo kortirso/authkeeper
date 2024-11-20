@@ -1,16 +1,16 @@
 # frozen_string_literal: true
 
-describe AuthContext::Providers::Yandex do
+describe Authkeeper::Providers::Yandex do
   subject(:service_call) { described_class.new.call(params: { code: code }) }
 
   let(:code) { 'code' }
   let(:user_response) { { 'id' => '123', 'default_email' => 'email' } }
 
   before do
-    allow(Backend::Container.resolve('api.yandex.auth_client')).to(
+    allow(Authkeeper::Container.resolve('api.yandex.auth_client')).to(
       receive(:fetch_access_token).and_return(token_response)
     )
-    allow(Backend::Container.resolve('api.yandex.client')).to(
+    allow(Authkeeper::Container.resolve('api.yandex.client')).to(
       receive(:info).and_return(user_response)
     )
   end
