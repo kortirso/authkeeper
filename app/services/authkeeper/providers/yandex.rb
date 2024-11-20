@@ -3,7 +3,7 @@
 module Authkeeper
   module Providers
     class Yandex
-      include Deps[
+      include AuthkeeperDeps[
         auth_client: 'api.yandex.auth_client',
         api_client: 'api.yandex.client'
       ]
