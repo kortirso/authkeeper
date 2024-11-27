@@ -49,6 +49,15 @@ module Authkeeper
       end
 
       def access_token_name = Authkeeper.configuration.access_token_name
+
+      def sign_in(user)
+        user_session = Authkeeper.configuration.user_session_model.constantize.create!(user: user)
+        cookies[Authkeeper.configuration.access_token_name] = {
+          value: Authkeeper::Container['services.generate_token'].call(user_session: user_session)[:result],
+          domain: Authkeeper.configuration.domain,
+          expires: 1.week.from_now
+        }.compact
+      end
     end
   end
 end
