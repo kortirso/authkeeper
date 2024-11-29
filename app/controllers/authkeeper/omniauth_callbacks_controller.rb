@@ -12,6 +12,7 @@ module Authkeeper
     TELEGRAM = 'telegram'
     GOOGLE = 'google'
     YANDEX = 'yandex'
+    VK = 'vk'
 
     skip_before_action :verify_authenticity_token
     skip_before_action :authenticate, only: %i[create]
@@ -49,7 +50,12 @@ module Authkeeper
     end
 
     def auth
-      @auth ||= provider_service(params[:provider]).call(params: params)[:result]
+      @auth ||=
+        provider_service(params[:provider]).call(params: params.merge(oauth_data))[:result]
+    end
+
+    def oauth_data
+      Rails.cache.read("oauth_data_#{params[:state]}") || {}
     end
 
     def provider_service(provider)

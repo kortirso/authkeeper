@@ -25,12 +25,14 @@ module Authkeeper
     register('api.google.client') { Authkeeper::GoogleApi::Client.new }
     register('api.yandex.auth_client') { Authkeeper::YandexAuthApi::Client.new }
     register('api.yandex.client') { Authkeeper::YandexApi::Client.new }
+    register('api.vk.auth_client') { Authkeeper::VkAuthApi::Client.new }
 
     register('services.providers.github') { Authkeeper::Providers::Github.new }
     register('services.providers.gitlab') { Authkeeper::Providers::Gitlab.new }
     register('services.providers.telegram') { Authkeeper::Providers::Telegram.new }
     register('services.providers.google') { Authkeeper::Providers::Google.new }
     register('services.providers.yandex') { Authkeeper::Providers::Yandex.new }
+    register('services.providers.vk') { Authkeeper::Providers::Vk.new }
 
     register('services.fetch_session') { Authkeeper::FetchSessionService.new }
     register('services.generate_token') { Authkeeper::GenerateTokenService.new }
