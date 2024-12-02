@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe YandexApi::Client, type: :client do
+describe Authkeeper::YandexApi::Client, type: :client do
   let(:headers) { { 'Content-Type' => 'application/json' } }
   let(:client) { described_class.new(connection: connection) }
 

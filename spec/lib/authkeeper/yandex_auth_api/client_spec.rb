@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-describe YandexAuthApi::Client, type: :client do
+describe Authkeeper::YandexAuthApi::Client, type: :client do
   let(:headers) { { 'Content-Type' => 'application/x-www-form-urlencoded' } }
   let(:client) { described_class.new(connection: connection) }
 
