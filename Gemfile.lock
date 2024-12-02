@@ -1,8 +1,8 @@
 PATH
   remote: .
   specs:
-    authkeeper (0.1.5)
-      rails (>= 7.2.2, < 8.0)
+    authkeeper (0.1.6)
+      rails (>= 7.2.2)
 
 GEM
   remote: https://rubygems.org/

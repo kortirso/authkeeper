@@ -17,7 +17,7 @@ module Authkeeper
         #   "expires_in" => 3600,
         #   "user_id" => 176780000,
         #   "state" => "ce4a09792e2cc8065a96074906709765",
-        #   "scope" => "vkid.personal_info email"
+        #   "scope" => "vkid.personal_info email phone ads"
         # }
 
         user_info = fetch_user_info(auth_info['access_token'])
@@ -36,7 +36,7 @@ module Authkeeper
 
         {
           result: {
-            auth_info: auth_info.symbolize_keys,
+            auth_info: auth_info.symbolize_keys.merge(device_id: params[:device_id]),
             user_info: {
               uid: user_info.dig('user', 'user_id'),
               provider: 'vk',

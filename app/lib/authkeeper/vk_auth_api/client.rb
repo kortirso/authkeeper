@@ -3,7 +3,7 @@
 module Authkeeper
   module VkAuthApi
     class Client < HttpService::Client
-      include Requests::FetchAccessToken
+      include Requests::AccessToken
       include Requests::Info
 
       BASE_URL = 'https://id.vk.com/'
