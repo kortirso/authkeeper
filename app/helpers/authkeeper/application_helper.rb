@@ -32,7 +32,7 @@ module Authkeeper
     end
 
     def vk_oauth_link(oauth_data)
-      "https://id.vk.com/authorize?scope=email&response_type=code&client_id=#{value(:vk, :client_id)}&code_challenge=#{oauth_data[:code_challenge]}&code_challenge_method=S256&redirect_uri=#{value(:vk, :redirect_url)}&state=#{oauth_data[:state]}"
+      "https://id.vk.com/authorize?scope=email%20phone%20ads&response_type=code&client_id=#{value(:vk, :client_id)}&code_challenge=#{oauth_data[:code_challenge]}&code_challenge_method=S256&redirect_uri=#{value(:vk, :redirect_url)}&state=#{oauth_data[:state]}"
     end
     # rubocop: enable Layout/LineLength
 
