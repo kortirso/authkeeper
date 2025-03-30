@@ -4,7 +4,7 @@ module Authkeeper
   class Configuration
     InitializeError = Class.new(StandardError)
 
-    attr_accessor :user_model, :user_session_model, :access_token_name, :domain, :fallback_url_session_name, :omniauth_providers
+    attr_accessor :user_model, :user_session_model, :access_token_name, :domain, :fallback_url_session_name, :omniauth_providers,
                   :token_expiration_seconds
     attr_reader :omniauth_configs
 
