@@ -3,7 +3,6 @@
 module Authkeeper
   class JwtEncoder
     HMAC_SECRET = Rails.application.secret_key_base
-    EXPIRATION_SECONDS = 604_800 # 1.week
 
     def encode(payload:, secret: HMAC_SECRET)
       JWT.encode(modify_payload(payload), secret)
@@ -18,8 +17,14 @@ module Authkeeper
     def modify_payload(payload)
       payload.merge!(
         random: SecureRandom.hex,
-        exp: DateTime.now.to_i + EXPIRATION_SECONDS
+        exp: DateTime.now.to_i + token_expiration_seconds
       )
+    end
+
+    private
+
+    def token_expiration_seconds
+      @token_expiration_seconds ||= Authkeeper.configuration.token_expiration_seconds
     end
   end
 end
