@@ -6,8 +6,8 @@ require 'base64'
 module Authkeeper
   module Providers
     class Telegram
-      REQUIRED_FIELDS = %i[id hash].freeze
-      HASH_FIELDS = %i[auth_date first_name id last_name photo_url username].freeze
+      REQUIRED_FIELDS = %w[id hash].freeze
+      HASH_FIELDS = %w[auth_date first_name id last_name photo_url username].freeze
       SECONDS_IN_DAY = 86_400
 
       def call(params: {})
@@ -19,7 +19,9 @@ module Authkeeper
           result: {
             uid: params[:id].to_s,
             provider: 'telegram',
-            login: params[:username]
+            login: params[:username],
+            first_name: params[:first_name],
+            last_name: params[:last_name]
           }
         }
       end
