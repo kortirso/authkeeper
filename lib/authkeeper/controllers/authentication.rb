@@ -58,6 +58,17 @@ module Authkeeper
           expires: 1.week.from_now
         }.compact
       end
+
+      def sign_out
+        access_token = cookies_token.presence || bearer_token.presence || params_token
+
+        if access_token
+          auth_call = Authkeeper::Container['services.fetch_session'].call(token: access_token)
+          auth_call[:result].destroy if auth_call[:result]
+        end
+
+        cookies.delete(access_token_name)
+      end
     end
   end
 end

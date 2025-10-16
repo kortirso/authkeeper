@@ -17,6 +17,8 @@ module Authkeeper
 
     register(:jwt_encoder) { Authkeeper::JwtEncoder.new }
 
+    register('api.discord.auth_client') { Authkeeper::DiscordAuthApi::Client.new }
+    register('api.discord.client') { Authkeeper::DiscordApi::Client.new }
     register('api.github.auth_client') { Authkeeper::GithubAuthApi::Client.new }
     register('api.github.client') { Authkeeper::GithubApi::Client.new }
     register('api.gitlab.auth_client') { Authkeeper::GitlabAuthApi::Client.new }
@@ -33,6 +35,7 @@ module Authkeeper
     register('services.providers.google') { Authkeeper::Providers::Google.new }
     register('services.providers.yandex') { Authkeeper::Providers::Yandex.new }
     register('services.providers.vk') { Authkeeper::Providers::Vk.new }
+    register('services.providers.discord') { Authkeeper::Providers::Discord.new }
 
     register('services.fetch_session') { Authkeeper::FetchSessionService.new }
     register('services.generate_token') { Authkeeper::GenerateTokenService.new }

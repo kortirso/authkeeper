@@ -4,6 +4,7 @@ module Authkeeper
   module ApplicationHelper
     def omniauth_link(provider, oauth_data=nil)
       case provider
+      when :discord then discord_oauth_link
       when :github then github_oauth_link
       when :gitlab then gitlab_oauth_link
       when :google then google_oauth_link
@@ -15,6 +16,10 @@ module Authkeeper
     private
 
     # rubocop: disable Layout/LineLength
+    def discord_oauth_link
+      "https://discord.com/oauth2/authorize?client_id=#{value(:discord, :client_id)}&response_type=code&redirect_uri=#{value(:discord, :redirect_url)}&scope=identify"
+    end
+
     def github_oauth_link
       "https://github.com/login/oauth/authorize?scope=user:email&response_type=code&client_id=#{value(:github, :client_id)}&redirect_uri=#{value(:github, :redirect_url)}"
     end

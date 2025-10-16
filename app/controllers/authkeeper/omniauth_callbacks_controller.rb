@@ -7,6 +7,7 @@ module Authkeeper
       generate_token: 'services.generate_token'
     ]
 
+    DISCORD = 'discord'
     GITHUB = 'github'
     GITLAB = 'gitlab'
     TELEGRAM = 'telegram'
