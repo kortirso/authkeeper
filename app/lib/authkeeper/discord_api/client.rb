@@ -2,7 +2,7 @@
 
 module Authkeeper
   module DiscordApi
-    class Client < HttpService::Client
+    class Client < Authkeeper::HttpService::Client
       include Requests::User
 
       BASE_URL = 'https://discord.com/api/v10/'

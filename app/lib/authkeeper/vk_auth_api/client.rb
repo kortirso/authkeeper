@@ -2,7 +2,7 @@
 
 module Authkeeper
   module VkAuthApi
-    class Client < HttpService::Client
+    class Client < Authkeeper::HttpService::Client
       include Requests::AccessToken
       include Requests::Info
 

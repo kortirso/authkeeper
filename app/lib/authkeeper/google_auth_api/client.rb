@@ -2,7 +2,7 @@
 
 module Authkeeper
   module GoogleAuthApi
-    class Client < HttpService::Client
+    class Client < Authkeeper::HttpService::Client
       include Requests::FetchAccessToken
 
       BASE_URL = 'https://www.googleapis.com/'

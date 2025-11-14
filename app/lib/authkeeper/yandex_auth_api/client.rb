@@ -2,7 +2,7 @@
 
 module Authkeeper
   module YandexAuthApi
-    class Client < HttpService::Client
+    class Client < Authkeeper::HttpService::Client
       include Requests::AccessToken
 
       BASE_URL = 'https://oauth.yandex.ru/'

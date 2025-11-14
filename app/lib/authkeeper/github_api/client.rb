@@ -2,7 +2,7 @@
 
 module Authkeeper
   module GithubApi
-    class Client < HttpService::Client
+    class Client < Authkeeper::HttpService::Client
       include Requests::User
       include Requests::UserEmails
 

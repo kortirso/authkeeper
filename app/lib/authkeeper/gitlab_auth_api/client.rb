@@ -2,7 +2,7 @@
 
 module Authkeeper
   module GitlabAuthApi
-    class Client < HttpService::Client
+    class Client < Authkeeper::HttpService::Client
       include Requests::FetchAccessToken
 
       BASE_URL = 'https://gitlab.com'
