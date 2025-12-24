@@ -8,14 +8,14 @@ module Authkeeper
     module Requests
       module AccessToken
         def fetch_access_token(client_id:, client_secret:, code:)
-          post(
+          form_post(
             path: 'token',
-            body: URI.encode_www_form({
+            body: {
               grant_type: 'authorization_code',
               client_id: client_id,
               client_secret: client_secret,
               code: code
-            }),
+            },
             headers: {
               'Content-Type' => 'application/x-www-form-urlencoded'
             }
@@ -23,12 +23,12 @@ module Authkeeper
         end
 
         def refresh_access_token(client_id:, client_secret:, refresh_token:)
-          post(
+          form_post(
             path: 'token',
-            body: URI.encode_www_form({
+            body: {
               grant_type: 'refresh_token',
               refresh_token: refresh_token
-            }),
+            },
             headers: {
               'Content-Type' => 'application/x-www-form-urlencoded',
               'Authorization' => "Basic #{authorization(client_id, client_secret)}"

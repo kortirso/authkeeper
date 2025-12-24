@@ -22,13 +22,29 @@ module Authkeeper
         }
       end
 
-      # rubocop: disable Metrics/AbcSize
-      def post(path:, body: nil, headers: nil)
+      def no_params_post(path:, body: nil, headers: nil)
         if Rails.env.test? && connection.adapter != 'Faraday::Adapter::Test'
           raise StandardError, 'please stub request in test env'
         end
 
         response = connection.post(path, body, headers)
+        response.body if response.success?
+      end
+
+      def post(path:, body: {}, params: {}, headers: {}) # rubocop: disable Metrics/AbcSize
+        if Rails.env.test? && connection.adapter != 'Faraday::Adapter::Test'
+          raise StandardError, 'please stub request in test env'
+        end
+
+        response = connection.post(path) do |request|
+          params.each do |param, value|
+            request.params[param] = value
+          end
+          headers.each do |header, value|
+            request.headers[header] = value
+          end
+          request.body = body.to_json
+        end
         response.body if response.success?
       end
 

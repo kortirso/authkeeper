@@ -5,7 +5,7 @@ module Authkeeper
     module Requests
       module FetchAccessToken
         def fetch_access_token(client_id:, client_secret:, code:, redirect_uri:)
-          post(
+          form_post(
             path: 'oauth2/v4/token',
             params: {
               grant_type: 'authorization_code',
