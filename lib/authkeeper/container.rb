@@ -37,6 +37,7 @@ module Authkeeper
     register('services.providers.vk') { Authkeeper::Providers::Vk.new }
     register('services.providers.discord') { Authkeeper::Providers::Discord.new }
 
+    register('services.fetch_uuid') { Authkeeper::FetchUuidService.new }
     register('services.fetch_session') { Authkeeper::FetchSessionService.new }
     register('services.generate_token') { Authkeeper::GenerateTokenService.new }
   end

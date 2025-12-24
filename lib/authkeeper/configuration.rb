@@ -5,7 +5,7 @@ module Authkeeper
     InitializeError = Class.new(StandardError)
 
     attr_accessor :user_model, :user_session_model, :access_token_name, :domain, :fallback_url_session_name, :omniauth_providers,
-                  :token_expiration_seconds
+                  :token_expiration_seconds, :current_user_cache_minutes
     attr_reader :omniauth_configs
 
     def initialize
@@ -20,6 +20,8 @@ module Authkeeper
       @omniauth_configs = {}
 
       @token_expiration_seconds = 18_144_000 # 30.days
+
+      @current_user_cache_minutes = nil
     end
 
     def validate

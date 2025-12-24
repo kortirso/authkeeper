@@ -14,6 +14,27 @@ module Authkeeper
       private
 
       def set_current_user
+        return find_user if Authkeeper.configuration.current_user_cache_minutes.nil?
+
+        access_token = cookies_token.presence || bearer_token.presence || params_token
+        return unless access_token
+
+        auth_uuid = Authkeeper::Container['services.fetch_uuid'].call(token: access_token)
+        return if auth_uuid[:errors].present?
+
+        user_id =
+          Rails.cache.fetch(
+            "authkeeper_cached_user_v2/#{auth_uuid[:result]}",
+            expires_in: Authkeeper.configuration.current_user_cache_minutes.minutes,
+            race_condition_ttl: 10.seconds
+          ) do
+            find_user
+            current_user&.id
+          end
+        @current_user ||= User.find_by(id: user_id)
+      end
+
+      def find_user
         access_token = cookies_token.presence || bearer_token.presence || params_token
         return unless access_token
 
@@ -65,6 +86,9 @@ module Authkeeper
         if access_token
           auth_call = Authkeeper::Container['services.fetch_session'].call(token: access_token)
           auth_call[:result].destroy if auth_call[:result]
+
+          auth_uuid = Authkeeper::Container['services.fetch_uuid'].call(token: access_token)
+          Rails.cache.delete("authkeeper_cached_user_v2/#{auth_uuid[:result]}") if auth_uuid[:result]
         end
 
         cookies.delete(access_token_name)
