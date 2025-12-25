@@ -14,7 +14,7 @@ module Authkeeper
       private
 
       def set_current_user
-        return find_user if Authkeeper.configuration.current_user_cache_minutes.nil?
+        return find_authkeeper_user if Authkeeper.configuration.current_user_cache_minutes.nil?
 
         access_token = cookies_token.presence || bearer_token.presence || params_token
         return unless access_token
@@ -28,13 +28,13 @@ module Authkeeper
             expires_in: Authkeeper.configuration.current_user_cache_minutes.minutes,
             race_condition_ttl: 10.seconds
           ) do
-            find_user
+            find_authkeeper_user
             current_user&.id
           end
         @current_user ||= User.find_by(id: user_id)
       end
 
-      def find_user
+      def find_authkeeper_user
         access_token = cookies_token.presence || bearer_token.presence || params_token
         return unless access_token
 
