@@ -39,7 +39,7 @@ module Authkeeper
       end
 
       def fetch_user_info(access_token)
-        api_client.info(access_token: access_token)
+        api_client.info(access_token: access_token)[:body]
       end
 
       def omniauth_config
