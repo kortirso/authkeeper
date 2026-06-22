@@ -39,6 +39,19 @@ module Authkeeper
             }
           )
         end
+
+        def remove_access_token(client_id:, access_token:)
+          form_post(
+            path: 'oauth2/logout',
+            body: {
+              client_id: client_id,
+              access_token: access_token
+            },
+            headers: {
+              'Content-Type' => 'application/x-www-form-urlencoded'
+            }
+          )
+        end
       end
     end
   end
