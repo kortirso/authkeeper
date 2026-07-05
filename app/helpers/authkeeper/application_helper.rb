@@ -10,6 +10,7 @@ module Authkeeper
       when :google then google_oauth_link
       when :yandex then yandex_oauth_link
       when :vk then vk_oauth_link(oauth_data)
+      when :vk_ads then vk_oauth_link(oauth_data)
       end
     end
 
@@ -38,6 +39,10 @@ module Authkeeper
 
     def vk_oauth_link(oauth_data)
       "https://id.vk.com/authorize?scope=email%20phone%20ads&response_type=code&client_id=#{oauth_data[:client_id] || value(:vk, :client_id)}&code_challenge=#{oauth_data[:code_challenge]}&code_challenge_method=S256&redirect_uri=#{oauth_data[:redirect_url] || value(:vk, :redirect_url)}&state=#{oauth_data[:state]}"
+    end
+
+    def vk_ads_oauth_link(oauth_data)
+      "https://ads.vk.ru/hq/settings/access?action=oauth2&response_type=code&client_id=#{oauth_data[:client_id]}&redirect_uri=#{oauth_data[:redirect_uri]}&scope=#{oauth_data[:scope]}&state=#{oauth_data[:state]}"
     end
     # rubocop: enable Layout/LineLength
 
