@@ -42,7 +42,7 @@ module Authkeeper
     end
 
     def vk_ads_oauth_link(oauth_data)
-      "https://ads.vk.ru/hq/settings/access?action=oauth2&response_type=code&client_id=#{oauth_data[:client_id]}&redirect_uri=#{oauth_data[:redirect_uri]}&scope=#{oauth_data[:scope]}&state=#{oauth_data[:state]}"
+      "https://ads.vk.ru/hq/settings/access?action=oauth2&response_type=code&client_id=#{oauth_data[:client_id]}&redirect_uri=#{oauth_data[:redirect_url]}&scope=#{oauth_data[:scope]}&state=#{oauth_data[:state]}"
     end
     # rubocop: enable Layout/LineLength
 
