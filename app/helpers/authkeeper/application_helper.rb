@@ -10,7 +10,7 @@ module Authkeeper
       when :google then google_oauth_link
       when :yandex then yandex_oauth_link
       when :vk then vk_oauth_link(oauth_data)
-      when :vk_ads then vk_oauth_link(oauth_data)
+      when :vk_ads then vk_ads_oauth_link(oauth_data)
       end
     end
 
