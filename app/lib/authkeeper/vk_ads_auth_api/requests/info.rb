@@ -8,7 +8,7 @@ module Authkeeper
           form_post(
             path: 'code_info',
             body: {
-              access_token: access_token,
+              code: code,
               client_id: client_id,
               client_secret: client_secret
             },
