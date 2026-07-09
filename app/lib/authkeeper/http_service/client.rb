@@ -48,7 +48,7 @@ module Authkeeper
         response.body if response.success?
       end
 
-      def form_post(path:, body: {}, params: {}, headers: {})
+      def form_post(path:, body: {}, params: {}, headers: {}, return_raw_response: false)
         if Rails.env.test? && connection.adapter != 'Faraday::Adapter::Test'
           raise StandardError, 'please stub request in test env'
         end
@@ -62,6 +62,8 @@ module Authkeeper
           end
           request.body = URI.encode_www_form(body)
         end
+        return response if return_raw_response
+
         response.body if response.success?
       end
       # rubocop: enable Metrics/AbcSize

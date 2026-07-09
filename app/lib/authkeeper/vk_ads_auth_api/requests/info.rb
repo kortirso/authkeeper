@@ -4,7 +4,7 @@ module Authkeeper
   module VkAdsAuthApi
     module Requests
       module Info
-        def info(code:, client_id:, client_secret:)
+        def info(code:, client_id:, client_secret:, return_raw_response: false)
           form_post(
             path: 'code_info',
             body: {
@@ -14,7 +14,8 @@ module Authkeeper
             },
             headers: {
               'Content-Type' => 'application/x-www-form-urlencoded'
-            }
+            },
+            return_raw_response: return_raw_response
           )
         end
       end
