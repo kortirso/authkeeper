@@ -6,7 +6,7 @@ module Authkeeper
   module VkAdsAuthApi
     module Requests
       module AccessToken
-        def fetch_access_token(client_id:, code:)
+        def fetch_access_token(client_id:, code:, return_raw_response: false)
           form_post(
             path: 'token.json',
             body: {
@@ -16,7 +16,8 @@ module Authkeeper
             },
             headers: {
               'Content-Type' => 'application/x-www-form-urlencoded'
-            }
+            },
+            return_raw_response: return_raw_response
           )
         end
 
@@ -35,7 +36,7 @@ module Authkeeper
           )
         end
 
-        def remove_access_token(client_id:, client_secret:, username: nil, user_id: nil)
+        def remove_access_token(client_id:, client_secret:, username: nil, user_id: nil, return_raw_response: false)
           form_post(
             path: 'token/delete.json',
             body: {
@@ -46,7 +47,8 @@ module Authkeeper
             }.compact,
             headers: {
               'Content-Type' => 'application/x-www-form-urlencoded'
-            }
+            },
+            return_raw_response: return_raw_response
           )
         end
       end
