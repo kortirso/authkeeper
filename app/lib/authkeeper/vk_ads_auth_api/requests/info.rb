@@ -6,7 +6,7 @@ module Authkeeper
       module Info
         def info(code:, client_id:, client_secret:, return_raw_response: false)
           form_post(
-            path: 'code_info',
+            path: 'code_info.json',
             body: {
               code: code,
               client_id: client_id,
