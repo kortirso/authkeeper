@@ -11,6 +11,7 @@ module Authkeeper
       when :yandex then yandex_oauth_link
       when :vk then vk_oauth_link(oauth_data)
       when :vk_ads then vk_ads_oauth_link(oauth_data)
+      when :avito then avito_oauth_link(oauth_data)
       end
     end
 
@@ -43,6 +44,10 @@ module Authkeeper
 
     def vk_ads_oauth_link(oauth_data)
       "https://ads.vk.ru/hq/settings/access?action=oauth2&response_type=code&client_id=#{oauth_data[:client_id]}&redirect_uri=#{oauth_data[:redirect_url]}&scope=#{oauth_data[:scope]}&state=#{oauth_data[:state]}"
+    end
+
+    def avito_oauth_link(oauth_data)
+      "https://avito.ru/oauth?response_type=code&client_id=#{oauth_data[:client_id]}&scope=#{oauth_data[:scope]}&state=#{oauth_data[:state]}"
     end
     # rubocop: enable Layout/LineLength
 
