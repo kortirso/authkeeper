@@ -29,6 +29,7 @@ module Authkeeper
     register('api.yandex.client') { Authkeeper::YandexApi::Client.new }
     register('api.vk.auth_client') { Authkeeper::VkAuthApi::Client.new }
     register('api.vk.ads_auth_client') { Authkeeper::VkAdsAuthApi::Client.new }
+    register('api.avito.auth_client') { Authkeeper::AvitoAuthApi::Client.new }
 
     register('services.providers.github') { Authkeeper::Providers::Github.new }
     register('services.providers.gitlab') { Authkeeper::Providers::Gitlab.new }
